@@ -1,0 +1,31 @@
+{
+    "name": "dsa",
+    "version": "0.1.0",
+    "author": "Saurav Naruka",
+    "license": "SEE LICENSE IN LICENSE",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/SauravNaruka/dsa.git"
+    },
+    "bugs": {
+        "url": "https://github.com/SauravNaruka/dsa/issues"
+    },
+    "homepage": "https://github.com/SauravNaruka/dsa#readme",
+    "scripts": {
+        "test": "jest",
+        "tsc": "tsc --watch",
+        "lint": "eslint --ext .js,.ts",
+        "format": "prettier --ignore-path .gitignore --write \"**/*.+(js|ts|json)\""
+    },
+    "devDependencies": {
+        "@types/jest": "^29.5.12",
+        "@typescript-eslint/eslint-plugin": "^7.0.1",
+        "@typescript-eslint/parser": "^7.0.1",
+        "eslint": "^8.56.0",
+        "eslint-config-prettier": "^9.1.0",
+        "jest": "^29.7.0",
+        "prettier": "^3.2.5",
+        "ts-jest": "^29.1.2",
+        "typescript": "^5.3.3"
+    }
+}
