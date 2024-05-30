@@ -1,39 +1,34 @@
-import { MinHeap } from "../dataStructures/heap";
+import { MinHeap } from "../dataStructures/minHeap";
 
 export function employeeFreeTime(schedule) {
-  const heap = new MinHeap((a, b) => {
-    const startA = a[0];
-    const startB = b[0];
-    return startA < startB;
-  });
+  const minHeap = new MinHeap((a, b) => a[0] - b[0]);
   const result = [];
+  let prevEnd;
 
-  for (let idx = 0; idx < schedule.length; idx++) {
-    const interval = schedule[idx][0];
-    // heap.offer([interval.start, idx, 0])
-    heap.add([interval.start, idx, 0]);
+  // Add first interval for all employees
+  for (let empIdx = 0; empIdx < schedule.length; empIdx++) {
+    minHeap.add([schedule[empIdx][0].start, empIdx, 0]);
   }
 
-  let [prevEnd] = heap.peek();
+  prevEnd = minHeap.peek()[0];
 
-  while (heap.size() > 0) {
-    // const [_, empIdx, intervalIdx] = heap.poll();
-    const [_, empIdx, intervalIdx] = heap.delete();
-    const empInterval = schedule[empIdx][intervalIdx];
+  while (!minHeap.isEmpty()) {
+    const [start, empIdx, intervalIdx] = minHeap.delete();
+    const currentEnd = schedule[empIdx][intervalIdx].end;
 
-    if (prevEnd < empInterval.start) {
-      const freeInterval = new Interval(prevEnd, empInterval.start);
-      result.push(freeInterval);
-    }
-    prevEnd = Math.max(empInterval.end, prevEnd);
+    if (prevEnd < start) result.push([prevEnd, start]);
+
+    prevEnd = Math.max(prevEnd, currentEnd);
 
     if (intervalIdx + 1 < schedule[empIdx].length) {
-      const nextInterval = schedule[empIdx][intervalIdx + 1];
-      heap.offer([nextInterval.start, empIdx, intervalIdx + 1]);
+      minHeap.add([
+        schedule[empIdx][intervalIdx + 1].start,
+        empIdx,
+        intervalIdx + 1,
+      ]);
     }
   }
 
-  // Replace this placeholder return statement with your code
   return result;
 }
 

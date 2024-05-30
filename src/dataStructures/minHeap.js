@@ -1,10 +1,10 @@
 export class MinHeap {
-  isLessThan = (a, b) => a < b;
+  compare = (a, b) => a < b;
   data;
 
-  constructor(isLessThan) {
-    if (isLessThan) {
-      this.isLessThan = isLessThan;
+  constructor(compare) {
+    if (compare) {
+      this.compare = compare;
     }
     this.data = [];
   }
@@ -43,7 +43,7 @@ export class MinHeap {
 
     while (
       parentIdx >= 0 &&
-      this.isLessThan(this.data[currIdx], this.data[parentIdx])
+      this.compare(this.data[parentIdx], this.data[currIdx]) > 0
     ) {
       this.swap(parentIdx, currIdx);
       currIdx = parentIdx;
@@ -61,12 +61,12 @@ export class MinHeap {
 
       if (
         rightChidlIndex < this.data.length &&
-        this.isLessThan(this.data[rightChidlIndex], this.data[leftChildIndex])
+        this.compare(this.data[rightChidlIndex], this.data[leftChildIndex]) > 0
       ) {
         swapIdex = rightChidlIndex;
       }
 
-      if (this.isLessThan(this.data[swapIdex], this.data[currIdx])) {
+      if (this.compare(this.data[currIdx], this.data[swapIdex]) > 0) {
         this.swap(currIdx, swapIdex);
         currIdx = swapIdex;
         leftChildIndex = this.leftChildIndex(currIdx);
