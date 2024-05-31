@@ -30,4 +30,27 @@ export function taskScheduler(tasks, n) {
   return result;
 }
 
+export function taskSchedulerTime(tasks, n) {
+  const freqMap = new Map();
+
+  for (let idx = 0; idx < tasks.length; idx++) {
+    const task = tasks[idx];
+    freqMap.set(task, (freqMap.get(task) || 0) + 1);
+  }
+  const sortedTask = Array.from(freqMap).sort((a, b) => a[1] - b[1]);
+  const mostFreq = sortedTask[sortedTask.length - 1][1];
+  sortedTask.pop();
+
+  let idleTime = (mostFreq - 1) * n;
+
+  while (sortedTask.length > 0 && idleTime > 0) {
+    idleTime -= Math.min(mostFreq - 1, sortedTask[sortedTask.length - 1][1]);
+    sortedTask.pop();
+  }
+
+  idleTime = Math.max(0, idleTime);
+
+  return tasks.length + idleTime;
+}
+
 export default taskScheduler;
