@@ -1,5 +1,5 @@
 export class MinHeap {
-  compare = (a, b) => a < b;
+  compare = (a, b) => a - b;
   data;
 
   constructor(compare) {
