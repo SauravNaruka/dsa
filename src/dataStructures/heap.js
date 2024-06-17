@@ -1,4 +1,4 @@
-export class MinHeap {
+export class Heap {
   compare = (a, b) => a - b;
   data;
 
@@ -61,7 +61,7 @@ export class MinHeap {
 
       if (
         rightChidlIndex < this.data.length &&
-        this.compare(this.data[rightChidlIndex], this.data[leftChildIndex]) > 0
+        this.compare(this.data[leftChildIndex], this.data[rightChidlIndex]) > 0
       ) {
         swapIdex = rightChidlIndex;
       }
@@ -94,4 +94,19 @@ export class MinHeap {
   }
 }
 
-export default MinHeap;
+export class MinHeap extends Heap {
+  constructor() {
+    super(minHeapCompare);
+  }
+}
+
+export class MaxHeap extends Heap {
+  constructor() {
+    super(maxHeapCompare);
+  }
+}
+
+const minHeapCompare = (a, b) => a - b;
+const maxHeapCompare = (a, b) => b - a;
+
+export default Heap;
