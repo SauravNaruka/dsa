@@ -95,14 +95,14 @@ export class Heap {
 }
 
 export class MinHeap extends Heap {
-  constructor() {
-    super(minHeapCompare);
+  constructor(compare) {
+    super(compare ? compare : minHeapCompare);
   }
 }
 
 export class MaxHeap extends Heap {
-  constructor() {
-    super(maxHeapCompare);
+  constructor(compare) {
+    super(compare ? compare : maxHeapCompare);
   }
 }
 
