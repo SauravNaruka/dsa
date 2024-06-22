@@ -61,4 +61,17 @@ export function listToArray(head) {
   }
   return result;
 }
+
+export function printListWithForwardArrow(linkedListNode) {
+  let temp = linkedListNode;
+  let result = "";
+  while (temp != null) {
+    result += temp.data;
+    temp = temp.next;
+    if (temp != null) result += " → ";
+    else result += " → null";
+  }
+  return result;
+}
+
 export default LinkedList;
